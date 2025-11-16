@@ -1,3 +1,22 @@
+# Local environment
+.env
 web/
 certbot/
 secrets/
+
+# Python / virtualenv (some systems)
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+
+# Docker artifacts (if ever generated locally)
+*.tar
+*.tar.gz
+
+# Editor/OS cruft
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
