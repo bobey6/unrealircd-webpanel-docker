@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  unrealircd-webpanel:
+    build:
+      context: .
+      args:
+        SKIP_CLONE: ${SKIP_CLONE:-0}
+    image: unrealircd-webpanel:latest
+    container_name: unrealircd-webpanel
+    ports:
+      - "${HOST_PORT:-80}:80"     # HTTP (HTTP-01 challenge requires host 80)
+      - "${HOST_PORT_SSL:-443}:443" # HTTPS
+    volumes:
+      - ./web:/var/www/html/unrealircd-webpanel:rw
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:rw
+      - ./secrets:/secrets:ro
+    restart: unless-stopped
+    env_file:
+      - .env
